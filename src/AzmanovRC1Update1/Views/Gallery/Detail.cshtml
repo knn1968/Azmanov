@@ -1,0 +1,12 @@
+﻿@model Azmanov.ViewModels.GalleryDetailViewModel
+@{
+    ViewBag.Title = "Gallery Detail";
+}
+
+<div class="text-center">
+    <div>
+        <img src="@Model.ImageUrl" class="img-responsive"/>
+    </div>
+    <div>@Model.Name</div>
+    <div><a class="btn btn-default" asp-controller="Gallery" asp-action="Index" asp-route-id="@Model.PageId">Back</a></div>
+</div>

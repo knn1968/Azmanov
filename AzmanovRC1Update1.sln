@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8EB2D4F8-0EB2-479C-8790-481CD2130F79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D8F7E06-C1FB-4DC9-8155-3B110A888E50}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AzmanovRC1Update1", "src\AzmanovRC1Update1\AzmanovRC1Update1.xproj", "{A58FBFDF-AC40-4922-9A1A-58E817D44DEF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Core", "src\Core\Core.xproj", "{3C9FCACD-C72F-471A-B9EF-22185ECA3B34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A58FBFDF-AC40-4922-9A1A-58E817D44DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A58FBFDF-AC40-4922-9A1A-58E817D44DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A58FBFDF-AC40-4922-9A1A-58E817D44DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A58FBFDF-AC40-4922-9A1A-58E817D44DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C9FCACD-C72F-471A-B9EF-22185ECA3B34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C9FCACD-C72F-471A-B9EF-22185ECA3B34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C9FCACD-C72F-471A-B9EF-22185ECA3B34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C9FCACD-C72F-471A-B9EF-22185ECA3B34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A58FBFDF-AC40-4922-9A1A-58E817D44DEF} = {8EB2D4F8-0EB2-479C-8790-481CD2130F79}
+		{3C9FCACD-C72F-471A-B9EF-22185ECA3B34} = {8EB2D4F8-0EB2-479C-8790-481CD2130F79}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,50 @@
+﻿@model Azmanov.ViewModels.EventsViewModel
+@{
+    ViewBag.Title = "Events";
+}
+
+<div class="row page-header">
+    <h2 class="col-xs-12">Events</h2>
+</div>
+
+<div class="row">
+    @foreach (var item in Model.PagingResult.CurrentPageItems.OrderBy(p => p.Id))
+    {
+        var culture = new System.Globalization.CultureInfo(Model.CurrentLanguageDetails.CultureCode);
+        <article class="col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>@item.Title</h4>
+                    <h5>@item.EventDate.ToString("d", culture)</h5>
+                </div>
+                <div class="panel-body">
+                    <div>@Html.Raw(item.Body)</div>
+                    @foreach (var image in item.Images)
+                    {
+                        <div><img src="@image.Location" class="img-responsive" /></div>
+                        <div class="text-center">@Html.Raw(image.Title)</div>
+                    }
+                </div>
+            </div>
+        </article>
+    }
+    <br />
+</div>
+
+<div class="pager row">
+    @if (Model.PagingResult.PreviousPage != null)
+    {
+        <a asp-controller="Events" asp-action="Index" asp-route-id="@Model.PagingResult.PreviousPage" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i></a>
+    }
+    @if (Model.PagingResult.CurrentPageGroupPageNumbers.Count() > 1 || (Model.PagingResult.PreviousPage != null || Model.PagingResult.NextPage != null))
+    {
+        foreach (var item in Model.PagingResult.CurrentPageGroupPageNumbers)
+        {
+            <a asp-controller="Events" asp-action="Index" asp-route-id="@item" class="btn  btn-default btn-sm">@item</a>
+        }
+    }
+    @if (Model.PagingResult.NextPage != null)
+    {
+        <a asp-controller="Events" asp-action="Index" asp-route-id="@Model.PagingResult.NextPage" class="btn btn-default btn-sm"><i class="fa fa-angle-right"></i></a>
+    }
+</div>

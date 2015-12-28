@@ -1,0 +1,49 @@
+﻿@model Azmanov.ViewModels.GalleryViewModel
+@{
+    ViewBag.Title = "Gallery";
+    ViewBag.pageId = this.ViewContext.RouteData.Values["id"]?.ToString();
+}
+
+<div class="row page-header">
+    <h2 class="col-xs-12">Gallery</h2>
+</div>
+
+<div class="row text-center">
+    @foreach (var item in Model.PagingResult.CurrentPageItems)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-3 text-center">
+            <div>
+                <a asp-controller="Gallery" asp-action="Detail" asp-route-id="@item.Id" asp-route-pageid="@Model.PagingResult.CurrentPage"><img src="@item.Location" class="img-thumbnail" /></a>
+            </div>
+            <div>
+                @item.Title
+            </div>
+        </div>
+    }
+</div>
+
+<div class="pager row">
+    <ul class="list-unstyled list-inline list-group">
+        @if (Model.PagingResult.PreviousPage != null)
+        {
+            <li class="list-group-item">
+                <a asp-controller="Gallery" asp-action="Index" asp-route-id="@Model.PagingResult.PreviousPage" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i></a>
+            </li>
+        }
+        @if (Model.PagingResult.CurrentPageGroupPageNumbers.Count() > 1 || (Model.PagingResult.PreviousPage != null || Model.PagingResult.NextPage != null))
+        {
+            foreach (var item in Model.PagingResult.CurrentPageGroupPageNumbers)
+            {
+                <li class="list-group-item @(item == Model.PagingResult.CurrentPage ? "active" : string.Empty)">
+                    <a asp-controller="Gallery" asp-action="Index" asp-route-id="@item" class="btn  btn-default btn-sm">@item</a>
+                </li>
+            }
+        }
+        @if (Model.PagingResult.NextPage != null)
+        {
+            <li class="list-group-item">
+                <a asp-controller="Gallery" asp-action="Index" asp-route-id="@Model.PagingResult.NextPage" class="btn  btn-default btn-sm"><i class="fa fa-angle-right"></i></a>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,80 @@
+@model Azmanov.ViewModels.MediaViewModel
+@{
+    ViewBag.Title = "Media";
+}
+
+@{
+    string currentPath = Context.Request.Path;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    string action = Html.ViewContext.ActionDescriptor.Name;
+    string id = this.ViewContext.RouteData.Values["id"]?.ToString();
+}
+
+@section Scripts
+{
+    <script src="~/js/expandcollapse.js"></script>
+}
+
+<div class="row page-header">
+    <h2 class="col-xs-12">Media</h2>
+</div>
+
+<div class="row">
+    @foreach (var item in Model.PagingResult.CurrentPageItems.OrderByDescending(p => p.EventDate))
+    {
+        var culture = new System.Globalization.CultureInfo(Model.CurrentLanguageDetails.CultureCode);
+        <article class="col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h2 class="panel-title">@Html.Raw(item.Title)</h2>
+                    <h5>@item.EventDate.ToString("d", culture)</h5>
+                </div>
+                <div class="panel-body">
+                    <span>@Html.Raw(item.Intro)</span>
+                    @if (!string.IsNullOrWhiteSpace(item.Body))
+                    {
+                        <strong id="@("elipses" + item.Id.ToString())">...</strong>
+                        <span class="collapse" id="@("body" + item.Id.ToString())">@Html.Raw(item.Body)</span>
+                    }
+                </div>
+                @if (!string.IsNullOrWhiteSpace(item.Body))
+                {
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-2 col-sm-offset-10">
+                                @*todo create a repository for settings and miscelaneous labels*@
+                                <a href="@("#body" + item.Id.ToString())" class="btn btn-primary" body-collapse data-elipses="@("#elipses" + item.Id.ToString())" data-see-more="See More >>" data-see-less="<< See Less">bla</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </article>
+    }
+</div>
+
+<div class="row text-center">
+    <ul class="pagination">
+        @if (Model.PagingResult.PreviousPage != null)
+        {
+            <li>
+                <a asp-controller="@controller" asp-action="Index" asp-route-id="@Model.PagingResult.PreviousPage" class="btn btn-default btn-sm"><i class="fa fa-angle-left"></i></a>
+            </li>
+        }
+        @if (Model.PagingResult.CurrentPageGroupPageNumbers.Count() > 1 || (Model.PagingResult.PreviousPage != null || Model.PagingResult.NextPage != null))
+        {
+            foreach (var item in Model.PagingResult.CurrentPageGroupPageNumbers)
+            {
+                <li>
+                    <a asp-controller="@controller" asp-action="Index" asp-route-id="@item" class="btn  btn-default btn-sm">@item</a>
+                </li>
+            }
+        }
+        @if (Model.PagingResult.NextPage != null)
+        {
+            <li>
+                <a asp-controller="@controller" asp-action="Index" asp-route-id="@Model.PagingResult.NextPage" class="btn  btn-default btn-sm"><i class="fa fa-angle-right"></i></a>
+            </li>
+        }
+    </ul>
+</div>

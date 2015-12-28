@@ -1,0 +1,19 @@
+﻿{
+  "AppSettings": {
+    "SiteEmailAddress": "azmanov@azmanov.com"
+  },
+  "Data": {
+    //"AzmanovContextConnection": "Server=(localdb)\\ProjectsV12;Database=AzmanovDbBeta7;Trusted_Connection=true;MultipleActiveResultSets=true;"
+    "AzmanovContextConnection": "Server=tcp:azmanov.database.windows.net,1433;Database=AzmanovRC1Update1;User ID=kirilnikolov@azmanov;Password=Av0cad0#;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;MultipleActiveResultSets=true;",
+    "AzmanovDevContextConnection": "Server=(localdb)\\ProjectsV12;Database=AzmanovRC1Update1;Trusted_Connection=true;MultipleActiveResultSets=true;"
+
+  },
+  "GallerySettings": {
+    "ImageDirectory": "\\wwwroot\\img\\gallery",
+    "ItemsPerPage": "12",
+    "PagesPerPageGroup": "5"
+  },
+  "HomePage": {
+    "ImageUrl": "~/img/home/home.jpg"
+  }
+}

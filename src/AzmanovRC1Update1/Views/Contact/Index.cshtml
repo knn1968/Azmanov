@@ -1,0 +1,28 @@
+﻿@model Azmanov.ViewModels.Models.ContactViewModel
+@{
+    ViewBag.Title = "Contact";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/js/contact.js"></script>
+}
+
+<div class="row page-header">
+    <h2 class="col-xs-12">Contact</h2>
+</div>
+@if (Model.RedirectToHome)
+{
+    <div class="row">
+        <h3 class="text-info col-xs-12">@Model.ThankYouMessage</h3>
+        <div class="col-xs-12">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-default" data-toggle="tooltip" title="Go to home page" data-placement="left">Home</a>
+        </div>
+    </div>
+}
+else
+{
+    @Html.Partial("ContactPartial", Model.FormInput)
+}

@@ -1,0 +1,17 @@
+@model Azmanov.ViewModels.AutobiographyViewModel
+@{
+    ViewBag.Title = "Autobiography";
+}
+
+<div class="row page-header">
+    <h2 class="col-xs-12">Autobiography</h2>
+</div>
+
+<div class="row">
+    <div class="col-sm-4 col-sm-push-8">
+        <IMG src="@Model.ImageUrl" class="ali img-responsive">
+    </div>
+    <div class="col-sm-8 col-sm-pull-4 well">
+        @Html.Raw(Model.Text);
+    </div>
+</div>

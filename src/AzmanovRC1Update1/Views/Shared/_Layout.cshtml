@@ -1,0 +1,86 @@
+﻿@model Azmanov.ViewModels.BaseViewModel
+
+@{
+    string currentPath = Context.Request.Path;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    string action = Html.ViewContext.ActionDescriptor.Name;
+    string id = this.ViewContext.RouteData.Values["id"]?.ToString();
+    string pageId = Context.Request.Query["pageid"].ToString();
+}
+
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+    <TITLE>TODOR AZMANOV - @ViewBag.Title</TITLE>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="icon" type="image/x-icon" href="~/img/favicon.ico" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    @*<link rel="stylesheet" href="~/lib/bootswatch/spacelab/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="~/css/site.css">
+</HEAD>
+<BODY>
+    @*<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">*@
+    <header class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-default navbar-fixed-top col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 cbp-af-header">
+                @*<div class="container-fluid">*@
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" asp-controller="Home" asp-action="Index">Azmanov.com</a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        @foreach (var menuItem in Model.MenuItemsList)
+                        {
+                            <li class="nav @(controller.ToLower() == menuItem.Controller.ToLower() ? "active" : string.Empty)"><a asp-controller="@menuItem.Controller" asp-action="@menuItem.Action">@menuItem.ShortDisplay</a></li>
+                        }
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@string.Format("{0} - {1}", Model.CurrentLanguageDetails.ShortDisplay, Model.CurrentLanguageDetails.LongDisplay)<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                @foreach (var item in Model.LanguagesList)
+                                {
+                                    <li><a asp-controller="@controller" asp-action="@action" asp-route-language="@item.ShortDisplayInEnglish" asp-route-id="@id" asp-route-pageid="@pageId"> @string.Format("{0} - {1}", item.ShortDisplay, item.LongDisplay) </a></li>
+                                }
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                @*</div>*@
+            </nav>
+        </div>
+    </header>
+
+    <div id="bodysection" class="container-fluid ">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer" class="container-fluid ">
+        <h4 class="text-center text-muted">&copy; @DateTime.Now.Year Azmanov</h4>
+    </footer>
+    @*</div>
+            </div>
+        </div>*@
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/site.js"></script>
+    <script src="~/js/classie.js"></script>
+    <script src="~/js/cbpanimatedheader.js"></script>
+    @RenderSection("Scripts", false)
+</BODY>
+</HTML>
